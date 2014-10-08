@@ -8,7 +8,7 @@
  * @property integer $AbiturId
  * @property integer $SpecId
  */
-class AbiturSpec extends CActiveRecord
+class AbiturSpecSort extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -45,7 +45,7 @@ class AbiturSpec extends CActiveRecord
 		//);
 		
 		return array(
-			'abitur'=>array(self::HAS_MANY, 'TblAbitur', 'AbiturId'),
+			'abitur'=>array(self::HAS_MANY, 'TblAbitur', 'Id'), //AbiturId
 			'spec'=>array(self::HAS_MANY, 'Spec', 'SpecId'),
 		);
 	}
@@ -83,6 +83,7 @@ class AbiturSpec extends CActiveRecord
 		$criteria->compare('Id',$this->Id);
 		$criteria->compare('AbiturId',$this->AbiturId);
 		$criteria->compare('SpecId',$this->SpecId);
+		$criteria->with = array('abitur' => array('joinType' => 'INNER JOIN'));
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -93,15 +94,22 @@ class AbiturSpec extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return AbiturSpec the static model class
+	 * @return AbiturSpecSort the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 	
-	public function getAbiturMassive(){
-		//return array('M' => 'Male', 'F' => 'Female');
-		return TblAbitur::generateAbiturMassive();
+	public static function getBallyFromID($id)
+	{			
+		$model = TblAbitur::model()->find('Id = :id', array(':id' => $id));
+
+		if(count($model) > 0)
+		{
+			return $model->EGE1+$model->EGE2+$model->EGE3;
+		}
+		else
+			return 0;
 	}
 }

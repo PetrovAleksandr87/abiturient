@@ -36,7 +36,8 @@
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Абитуриенты', 'url'=>array('/tblAbitur/index')),
 				array('label'=>'Специальности', 'url'=>array('/spec/index')),
-				array('label'=>'АбитурСпец', 'url'=>array('/abiturSpec/index'))
+				array('label'=>'АбитурСпец', 'url'=>array('/abiturSpec/index')),
+				array('label'=>'АбитурСпец Сорт', 'url'=>array('/abiturSpecSort/admin'))
 			),
 		)); ?>
 	</div><!-- mainmenu -->
