@@ -5,6 +5,15 @@
 
 <div class="view">
 
+<?php $image = CHtml::image(Yii::app()->baseUrl.'/images/'.$data->Id.'_min.jpg',
+	'$data->Id',
+	array(
+        'onmouseover'=>'this.src="'.Yii::app()->baseUrl.'/images/'.$data->Id.'.jpg";',
+		'onmouseout'=>'this.src="'.Yii::app()->baseUrl.'/images/'.$data->Id.'_min.jpg";',
+	));
+echo CHtml::link($image, Yii::app()->baseUrl.'/images/1.jpg'); ?>
+<br />
+
 	<!--<b><?php echo CHtml::encode($data->getAttributeLabel('Id')); ?>:</b>
 	<?php echo CHtml::link(CHtml::encode($data->Id), array('view', 'id'=>$data->Id)); ?>
 	<br />-->

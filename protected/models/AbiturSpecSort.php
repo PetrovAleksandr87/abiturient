@@ -10,6 +10,8 @@
  */
 class AbiturSpecSort extends CActiveRecord
 {
+	public $sumBally=0;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -31,8 +33,17 @@ class AbiturSpecSort extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('Id, AbiturId, SpecId', 'safe', 'on'=>'search'),
+			array ( 'sumBally','unSafe')
 		);
-	}
+	} 
+	
+	//группа условий по умолчанию
+    /*public function defaultScope()
+    {
+        return array(
+            'select '=>" *, 123 AS sumBally",
+        );
+    }*/
 
 	/**
 	 * @return array relational rules.
@@ -83,7 +94,11 @@ class AbiturSpecSort extends CActiveRecord
 		$criteria->compare('Id',$this->Id);
 		$criteria->compare('AbiturId',$this->AbiturId);
 		$criteria->compare('SpecId',$this->SpecId);
-		$criteria->with = array('abitur' => array('joinType' => 'INNER JOIN'));
+		//$criteria->with = array('abitur' => array('joinType' => 'INNER JOIN'));
+		
+		$criteria->with = array('abitur'=>array(
+			'select' => array('234 as sumBally'))
+		);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -76,5 +76,11 @@ $('.search-form form').submit(function(){
 			'type' => 'raw', 
 			'value' => '$data->abitur()->EGE1',
 		),*/
+		'abiturBally3' => array( 
+			'header' => 'Баллы', 
+			'name' => 'Bally3', 
+			'type' => 'raw', 
+			'value' => '$data->sumBally',
+		),
 	),
 )); ?>
